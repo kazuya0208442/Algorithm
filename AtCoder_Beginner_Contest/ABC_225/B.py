@@ -18,18 +18,40 @@
 # main()               # もう少しシンプルに書こうか
 
 
-N = int(input())            # 各頂点がいくつの点とつながっているのかの個数を求める方針
-N_list = [0] * (N + 1)
+# N = int(input())            # 各頂点がいくつの点とつながっているのかの個数を求める方針
+# N_list = [0] * (N + 1)
+
+# for _ in range(N-1):
+#     a, b = map(int, input().split())
+#     N_list[a] += 1
+#     N_list[b] += 1
+
+# if max(N_list) == N-1:
+#     print('Yes')
+# else:
+#     print('No')
+
+
+
+
+
+
+
+# edgesの配列の中で、N-1個のvertexとつながっているものがあればオッケー
+
+N = int(input())
+edges = [[] for _ in range(N+1)]
 
 for _ in range(N-1):
     a, b = map(int, input().split())
-    N_list[a] += 1
-    N_list[b] += 1
+    edges[a].append(b)
+    edges[b].append(a)
 
-if max(N_list) == N-1:
-    print('Yes')
-else:
-    print('No')
+# print(edges)
 
+for i in range(N+1):
+    if len(edges[i]) == N-1:
+        print('Yes')
+        exit()
 
-
+print('No')
