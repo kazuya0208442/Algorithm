@@ -58,26 +58,73 @@
 
 # (1, 1), (1, 2), (2, 1) とかでも大丈夫かな。(1, 1)に関しては正解だけどforループに引っかからないので、あらかじめ、valid=Trueにして、ダメなやつをFalseにしておとしていこう。　
 
+# N, M = map(int, input().split())
+# B_matrix = [list(map(int, input().split())) for _ in range(N)]
+
+# valid = True              # 一旦、全てをTrueにして、条件に合わないものをFalseにする。
+
+# for i in range(N):
+#     for j in range(M):
+#         if j + 1 < M and B_matrix[i][j] + 1 != B_matrix[i][j+1]:
+#             valid = False
+#             break
+#         if i + 1 < N and  B_matrix[i][j] + 7 != B_matrix[i+1][j]:
+#             valid = False
+#             break
+#         if j != M - 1 and B_matrix[i][j] % 7 == 0:
+#             valid = False
+#             break
+
+# if valid == True:
+#     print('Yes')
+# else:
+#     print('No')
+
+
+
+
+
+
+# 具体的な行列を作ってみるとイメージしやすい。
+# 式だけだとよくわからん。
+# [1, 2, 3, 4, 5, 6, 7]
+# [8, 9, 10,11,12,13,14]
+# [15,16,17,18,19,20,21]
+
+# 7で割った余りが0の数字は最後に存在すること。
+# 行を見ると1ずつ増えている。
+# 列を見ると、7ずつ増えている。
+
+
 N, M = map(int, input().split())
-B_matrix = [list(map(int, input().split())) for _ in range(N)]
+base_row = list(map(int, input().split()))
 
-valid = True              # 一旦、全てをTrueにして、条件に合わないものをFalseにする。
+for i in range(M-1):
+    if base_row[i] + 1 != base_row[i+1]:
+        print('No')
+        exit()
+    elif base_row[i] % 7 == 0:
+        print('No')
+        exit()
 
-for i in range(N):
-    for j in range(M):
-        if j + 1 < M and B_matrix[i][j] + 1 != B_matrix[i][j+1]:
-            valid = False
-            break
-        if i + 1 < N and  B_matrix[i][j] + 7 != B_matrix[i+1][j]:
-            valid = False
-            break
-        if j != M - 1 and B_matrix[i][j] % 7 == 0:
-            valid = False
-            break
+for _ in range(N-1):
+    next_row = list(map(int, input().split()))
+    for i in range(M):
+        if base_row[i] + 7 != next_row[i]:
+            print('No')
+            exit()
+    base_row = next_row
 
-if valid == True:
-    print('Yes')
-else:
-    print('No')
+print('Yes')
+
+
+
+
+
+
+
+
+
+
 
 
