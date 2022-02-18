@@ -1,9 +1,19 @@
+# def main():
+#     S = input()
+#     if S[-2:] == 'er':
+#         print('er')
+#     elif S[-3:] == 'ist':
+#         print('ist')
 
-def main():
-    S = input()
-    if S[-2:] == 'er':
-        print('er')
-    elif S[-3:] == 'ist':
-        print('ist')
+# main()
 
-main()
+
+
+
+
+S = input()
+
+if S[-2:] == 'er':
+    print('er')
+else:
+    print('ist')
