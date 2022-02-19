@@ -61,47 +61,47 @@
 
 
 
-from collections import deque
+# from collections import deque
 
-M = int(input())
-route = [[] for _ in range(10)]
+# M = int(input())
+# route = [[] for _ in range(10)]
 
-for _ in range(M):
-    u, v = map(int, input().split())
-    route[u].append(v)
-    route[v].append(u)
+# for _ in range(M):
+#     u, v = map(int, input().split())
+#     route[u].append(v)
+#     route[v].append(u)
 
-P = list(x - 1 for x in map(int, input().split()))   # 9つの頂点番号のインデックスは-1しないとね。
-state = list("9" for _ in range(9))  # ['9', '3', '1', '4', '5', '6', '7', '8', '2']
+# P = list(x - 1 for x in map(int, input().split()))   # 9つの頂点番号のインデックスは-1しないとね。
+# state = list("9" for _ in range(9))  # ['9', '3', '1', '4', '5', '6', '7', '8', '2']
 
-for j, pj in enumerate(P, 1):
-    state[pj] = str(j)
+# for j, pj in enumerate(P, 1):
+#     state[pj] = str(j)
 
-que = deque()
-que.append([state, 0])
-state_set = set()
-goal = [str(i+1) for i in range(9)]
+# que = deque()
+# que.append([state, 0])
+# state_set = set()
+# goal = [str(i+1) for i in range(9)]
 
-while que:
-    state, count = que.popleft()
+# while que:
+#     state, count = que.popleft()
 
-    if state == goal:
-        print(count)
-        break
+#     if state == goal:
+#         print(count)
+#         break
 
-    white = state.index("9") + 1     # 空いてる頂点番号
+#     white = state.index("9") + 1     # 空いてる頂点番号
 
-    for i in route[white]:
-        state[white-1], state[i-1] = state[i-1], state[white-1]
-        string = ''.join(state)
-        state[white-1], state[i-1] = state[i-1], state[white-1]
+#     for i in route[white]:
+#         state[white-1], state[i-1] = state[i-1], state[white-1]
+#         string = ''.join(state)
+#         state[white-1], state[i-1] = state[i-1], state[white-1]
 
-        if string not in state_set:
-            state_set.add(string)
-            que.append([list(string), count+1])
+#         if string not in state_set:
+#             state_set.add(string)
+#             que.append([list(string), count+1])
 
-# print('-1')
+# # print('-1')
 
-else:
-    print('-1')
+# else:
+#     print('-1')
 
