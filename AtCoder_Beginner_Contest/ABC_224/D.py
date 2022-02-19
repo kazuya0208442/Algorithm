@@ -105,3 +105,58 @@
 # else:
 #     print('-1')
 
+
+
+
+
+# パズルの配置をBFSしていく。
+# status の配列は、status[0]: 0の駒がどこにいるのか、表す。
+# status[8]: 8の駒は存在しない。これは、空白がどこの頂点にいるのかを表す。
+
+from collections import deque
+N = 9
+M = int(input())
+que = deque()
+seen = set()
+edge = [[] for _ in range(N)]
+
+for _ in range(M):
+    u, v = map(int, input().split())
+    u -= 1
+    v -= 1
+    edge[u].append(v)
+    edge[v].append(u)
+
+status = [num - 1 for num in map(int, input().split())]
+for v in range(9):
+    if v not in status:
+        status.append(v)
+
+goal = [v for v in range(9)]
+que.append([status, 0])
+seen.add(tuple(status))
+
+while que:
+    status, count = que.popleft()
+    if status == goal:
+        print(count)
+        exit()
+    
+    for to in edge[status[8]]:
+        temp = status[:]
+        temp[8], temp[temp.index(to)] = to, temp[8]
+
+        if tuple(temp) not in seen:
+            seen.add(tuple(temp))
+            que.append([temp, count+1])
+
+
+
+print(-1)
+
+
+
+
+
+
+
