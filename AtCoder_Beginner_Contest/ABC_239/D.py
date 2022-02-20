@@ -1,3 +1,6 @@
+# Takahashiが勝つには、足されても素数にならない数が１つでもあればいい
+# iを決めて、jが全部回っても素数にできないなら、そのiを出せば高橋の勝ち
+
 from typing import Set
 
 def make_prime_number(N: int) -> Set[int]:
