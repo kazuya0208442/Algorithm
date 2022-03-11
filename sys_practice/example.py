@@ -42,11 +42,11 @@ example_list = []
 
 # sys.stdin を調べる
 
-# for s in sys.stdin:
-#     print(s.rstrip())
+for s in sys.stdin:
+    print(s.rstrip())
 
 # 出力してみる
-sys.stdout.write('text\n\ntext\n') 
+# sys.stdout.write('text\n\ntext\n') 
 
 
 
