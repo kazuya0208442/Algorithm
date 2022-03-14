@@ -24,33 +24,66 @@
 
 # import math
 
-N = int(input())
-ans = 0
+# N = int(input())
+# ans = 0
 
 
-def count_divisor(x: int) -> int:
-    # limit = int(pow(x, 1/2))
-    limit = int(x ** (1/2))
-    ans = 0
-    for num in range(1, limit+1):
-        if num**2 == x and x % num == 0:    # num**2 = xとするのがポイント
-            ans += 1
-        elif x % num == 0:
-            ans += 2
-    return ans
+# def count_divisor(x: int) -> int:
+#     # limit = int(pow(x, 1/2))
+#     limit = int(x ** (1/2))
+#     ans = 0
+#     for num in range(1, limit+1):
+#         if num**2 == x and x % num == 0:    # num**2 = xとするのがポイント
+#             ans += 1
+#         elif x % num == 0:
+#             ans += 2
+#     return ans
 
-for i in range(1, N+1, 2):
-    if count_divisor(i) == 8:
-        ans += 1
+# for i in range(1, N+1, 2):
+#     if count_divisor(i) == 8:
+#         ans += 1
 
-print(ans)
+# print(ans)
 # print(count_divisor(2))
 
 
 
+import sys
+
+def main(lines):
+    N = int(lines[0])
+    ans = 0
+
+    def count_divisor(N: int) -> int:
+        lower_divisor = []
+        upper_divisor = []
+        number = 1
+
+        while number ** 2 <= N:
+            if number ** 2 == N:
+                lower_divisor.append(number)
+                break
+            if N % number == 0:
+                lower_divisor.append(number)
+                upper_divisor.append(N // number)
+            number += 1
+        
+        divisor = lower_divisor + upper_divisor[::-1]
+
+        return len(divisor)
+    
+    for v in range(1, N+1, 2):
+        if count_divisor(v) == 8:
+            ans += 1
+    
+    print(ans)
 
 
-
+if __name__ == '__main__':
+    lines = []
+    for line in sys.stdin:
+        lines.append(line.rstrip('\r\n'))
+    main(lines)
 
 
 
