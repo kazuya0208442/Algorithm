@@ -113,3 +113,46 @@
 
 
 # 練習で解いてみる
+
+import sys
+from typing import List
+
+
+
+def main(lines: List):
+    N, K = map(int, lines[0].split())
+    def base_n_to_10(n: int, x: int) -> int:
+        base_10 = 0
+        digit = 0
+        while x:
+            last_number = x % 10
+            base_10 += last_number * (n ** digit)
+            digit += 1
+            x //= 10
+        return base_10
+    
+    def base_10_to_n(n: int, x: int) -> int:
+        base_n = ''
+
+        if x == 0:
+            base_n = '0'
+
+        while x:
+            last_number = x % n 
+            base_n = str(last_number) + base_n
+            x //= n
+        
+        return base_n
+    
+    for _ in range(K):
+        N = base_10_to_n(9, base_n_to_10(8, N))
+        N = int(N.replace('8', '5'))
+    
+    print(N)
+
+
+if __name__ == '__main__':
+    lines = []
+    for l in sys.stdin:
+        lines.append(l.rstrip('\r\n'))
+    main(lines)
