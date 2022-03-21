@@ -1,52 +1,36 @@
-N, K = map(int, input().split())
+# N, K = map(int, input().split())
 
-# n進数を10進数にするには、一桁ずつ見ていく
-# n**0, n**1, n**2 を順番に掛けていけばいい
-# 10で切り捨てれば、一桁ずつ見ていける。n進数だろうがなんだろうが。
-def n_to_ten(x: int, n: int) -> int:
-    ans = 0
-    digit = 0
-    while x:
-        last_num = x % 10
-        ans += last_num * (n ** digit)
-        x //= 10
-        digit += 1
-    return ans
+# # n進数を10進数にするには、一桁ずつ見ていく
+# # n**0, n**1, n**2 を順番に掛けていけばいい
+# # 10で切り捨てれば、一桁ずつ見ていける。n進数だろうがなんだろうが。
+# def n_to_ten(x: int, n: int) -> int:
+#     ans = 0
+#     digit = 0
+#     while x:
+#         last_num = x % 10
+#         ans += last_num * (n ** digit)
+#         x //= 10
+#         digit += 1
+#     return ans
 
-# 10進数をn進数にするには、nで割った余りを逆順でくっつけていく
-# n で切り捨てていく
-def ten_to_n(x: int, n: int) -> int:
-    if x == 0:                         # 0が来たら文字列を返してしまうので、ここで対処する。
-        return '0'
-    ans = ''
-    while x:                 # x < 1 になったらout 10進数を一桁ずつ取るときをイメージすれば行ける。
-        num = str(x % n) 
-        ans = num + ans
-        x //= n 
-    return ans
+# # 10進数をn進数にするには、nで割った余りを逆順でくっつけていく
+# # n で切り捨てていく
+# def ten_to_n(x: int, n: int) -> int:
+#     if x == 0:                         # 0が来たら文字列を返してしまうので、ここで対処する。
+#         return '0'
+#     ans = ''
+#     while x:                 # x < 1 になったらout 10進数を一桁ずつ取るときをイメージすれば行ける。
+#         num = str(x % n) 
+#         ans = num + ans
+#         x //= n 
+#     return ans
 
-for _ in range(K):
-    N = ten_to_n(n_to_ten(N, 8), 9)
-    N = N.replace('8', '5')
-    N = int(N)
+# for _ in range(K):
+#     N = ten_to_n(n_to_ten(N, 8), 9)
+#     N = N.replace('8', '5')
+#     N = int(N)
 
-print(N)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+# print(N)
 
 
 
@@ -126,3 +110,6 @@ print(N)
 
 
 
+
+
+# 練習で解いてみる
