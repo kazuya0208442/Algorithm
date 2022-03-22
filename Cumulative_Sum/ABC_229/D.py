@@ -14,45 +14,91 @@
 
 # 左端がforループで動いていくから、その都度、左端を調べて、S(1) - S(0) = 1 > K になってたら、そこからスタートしても0なので、0を返してcontinueだな。
 
+# import sys
+# from typing import List
+
+# def main(lines: List):
+#     S = list(lines[0])
+#     K = int(lines[1])
+#     cumulative_sum = [0]
+#     ans = 0
+
+#     for i in range(len(S)):
+#         if S[i] == 'X':
+#             cumulative_sum.append(cumulative_sum[i] + 0)
+#         else:
+#             cumulative_sum.append(cumulative_sum[i] + 1)
+    
+#     for j in range(len(S)):
+#         left = j
+#         right = len(cumulative_sum) - 1
+
+#         if cumulative_sum[-1] - cumulative_sum[left] <= K:   # 全部 Yes の場合を省く
+#             ans = max(ans, len(S) - left)
+#             continue
+
+#         elif cumulative_sum[left+1] - cumulative_sum[left] > K:
+#             continue
+
+#         while right - left > 1:
+#             mid = (left + right) // 2
+#             if cumulative_sum[mid] - cumulative_sum[j] <= K:
+#                 left = mid
+#             else:
+#                 right = mid
+        
+#         ans = max(ans, left - j)
+        
+#         # leftの条件 -> S(left) - S(j) <= K -> [j, left)
+#         # j項目からleft-1項目までの累積和がK以下ってこと。
+        
+#     print(ans)
+
+
+# if __name__ == '__main__':
+#     lines = []
+#     for l in sys.stdin:
+#         lines.append(l.rstrip('\r\n'))
+#     main(lines)
+
+
+
+
+
+
+
+# 尺取り法で練習するわよ
+
 import sys
 from typing import List
 
 def main(lines: List):
     S = list(lines[0])
     K = int(lines[1])
-    cumulative_sum = [0]
     ans = 0
 
     for i in range(len(S)):
-        if S[i] == 'X':
-            cumulative_sum.append(cumulative_sum[i] + 0)
+        if S[i] == '.':
+            S[i] = 1
         else:
-            cumulative_sum.append(cumulative_sum[i] + 1)
+            S[i] = 0
+
+    temporary_sum = 0
+    right = 0
+
+    for left in range(len(S)):
+        while (right < len(S)) and (temporary_sum + S[right] <= K):
+            temporary_sum += S[right]
+            right += 1
+        ans = max(ans, right - left)
+        
+        if left == right:
+            right += 1
+        else:
+            temporary_sum -= S[left]
     
-    for j in range(len(S)):
-        left = j
-        right = len(cumulative_sum) - 1
-
-        if cumulative_sum[-1] - cumulative_sum[left] <= K:   # 全部 Yes の場合を省く
-            ans = max(ans, len(S) - left)
-            continue
-
-        elif cumulative_sum[left+1] - cumulative_sum[left] > K:
-            continue
-
-        while right - left > 1:
-            mid = (left + right) // 2
-            if cumulative_sum[mid] - cumulative_sum[j] <= K:
-                left = mid
-            else:
-                right = mid
-        
-        ans = max(ans, left - j)
-        
-        # leftの条件 -> S(left) - S(j) <= K -> [j, left)
-        # j項目からleft-1項目までの累積和がK以下ってこと。
-        
     print(ans)
+
 
 
 if __name__ == '__main__':
